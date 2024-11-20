@@ -8,8 +8,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" href="icon.ico" type="image/x-icon">
     <style>
+        :root {
+            --grid-unit: 1rem;
+            --border-radius-base: 0.5rem;
+        }
+
+        [data-theme="light"] {
+            --color-bg: #ffffff;
+            --color-fg: #000000;
+        }
+
+        [data-theme="dark"] {
+            --color-bg: #000000;
+            --color-fg: #ffffff;
+        }
+
         body {
-            background-color: #f8f9fa;
+            background-color: var(--color-bg);
+            color: var(--color-fg);
         }
 
         .login-container {
@@ -20,7 +36,8 @@
         }
 
         .login-box {
-            background-color: white;
+            background-color: var(--color-bg);
+            color: var(--color-fg);
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
@@ -50,6 +67,27 @@
         .login-box .form-text {
             text-align: right;
         }
+
+        button[data-theme-toggle] {
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--color-bg);
+            color: var(--color-fg);
+            border: 2px solid var(--color-fg);
+            border-radius: var(--border-radius-base);
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1)
+        }
+
+        button[data-theme-toggle]:hover {
+            background-color: var(--color-fg);
+            color: var(--color-bg);
+        }
     </style>
 </head>
 
@@ -64,7 +102,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="main.html">Home</a>
+                        <a class="nav-link" aria-current="page" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="aboutus.html">About</a>
@@ -73,7 +111,7 @@
                         <a class="nav-link" href="order.html">Sell My Car</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
+                        <a class="nav-link" href="contact.html">Contact</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="login.html">Login</a>
@@ -81,6 +119,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="gallery.html">Gallery</a>
                     </li>
+                    <a class="nav-link active" href="cars.html">Car Inventory</a>
                 </ul>
             </div>
         </div>
@@ -89,7 +128,6 @@
     <div class="login-container">
         <div class="login-box">
             <h2>Welcome back</h2>
-
             <form id="loginForm">
                 <div class="mb-3">
                     <label for="username" class="form-label">Enter your username</label>
@@ -117,65 +155,89 @@
             </div>
         </div>
     </div>
-    <div class="container text-center my-5">
-        <button id="themeToggleButton" class="btn btn-secondary">Switch to Night Theme</button>
-    </div>
+
+<button id="themeToggleButton" data-theme-toggle class="btn btn-secondary">Switch to Night Theme</button>
+
 
     <script>
-        // Load saved username from local storage if it exists
+        // Theme toggle script
+        const button = document.querySelector("[data-theme-toggle]");
+        const systemSettingDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+        function calculateSettingAsThemeString(localStorageTheme, systemSettingDark) {
+            if (localStorageTheme) return localStorageTheme;
+            return systemSettingDark.matches ? "dark" : "light";
+        }
+
+        function applyTheme(theme) {
+            document.documentElement.setAttribute("data-theme", theme);
+            button.innerText = theme === "dark" ? "Change to light theme" : "Change to dark theme";
+            button.setAttribute("aria-label", button.innerText);
+            localStorage.setItem("theme", theme);
+        }
+
+        const savedTheme = localStorage.getItem("theme");
+        const initialTheme = calculateSettingAsThemeString(savedTheme, systemSettingDark);
+        applyTheme(initialTheme);
+
+        button.addEventListener("click", () => {
+            const newTheme = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+            applyTheme(newTheme);
+        });
+
+        // Login/logout script
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters long.');
+                return;
+            }
+
+            if (rememberMe) {
+                localStorage.setItem('savedUsername', username);
+            } else {
+                localStorage.removeItem('savedUsername');
+            }
+
+            alert('Login successful!');
+            localStorage.setItem('isLoggedIn', 'true');
+            window.location.href = 'index.html';
+        });
+
         window.addEventListener('load', function () {
             const savedUsername = localStorage.getItem('savedUsername');
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+
             if (savedUsername) {
                 document.getElementById('username').value = savedUsername;
                 document.getElementById('rememberMe').checked = true;
             }
-        });
 
-        document.getElementById('loginForm').addEventListener('submit', function (e) {
-            e.preventDefault();
+            const authButton = document.createElement('button');
+            authButton.classList.add('btn', 'btn-primary');
+            authButton.style.position = 'fixed';
+            authButton.style.bottom = '10px';
+            authButton.style.right = '10px';
 
-            let username = document.getElementById('username').value;
-            let password = document.getElementById('password').value;
-            let rememberMe = document.getElementById('rememberMe').checked;
-            let errorMessage = '';
-
-            if (password.length < 8) {
-                errorMessage += 'Password must be at least 8 characters long.\n';
-            }
-
-            if (errorMessage) {
-                alert(errorMessage);
+            if (isLoggedIn) {
+                authButton.textContent = 'Logout';
+                authButton.addEventListener('click', function () {
+                    localStorage.removeItem('isLoggedIn');
+                    alert('You have been logged out.');
+                    window.location.href = 'login.html';
+                });
             } else {
-                // Save username in local storage if "Remember me" is checked
-                if (rememberMe) {
-                    localStorage.setItem('savedUsername', username);
-                } else {
-                    localStorage.removeItem('savedUsername');
-                }
-
-                alert('Login successful!');
-                // Redirect to another page after successful login
-                window.location.href = "main.html";
+                authButton.textContent = 'Login';
+                authButton.addEventListener('click', function () {
+                    window.location.href = 'login.html';
+                });
             }
-        });
-        function logout() {
-            localStorage.removeItem('savedUsername');
-            window.location.href = 'login.html'; // Перенаправляем на страницу входа
-        }
 
-        window.addEventListener('load', function () {
-            const savedUsername = localStorage.getItem('savedUsername');
-            const authButton = document.getElementById('authButton');
-
-            if (savedUsername) {
-                authButton.textContent = 'Logout'; // Если пользователь вошел, показываем Logout
-                authButton.addEventListener('click', logout); // Добавляем обработчик для Logout
-            } else {
-                authButton.textContent = 'Login'; // Если не вошел, показываем Login
-                authButton.onclick = function () {
-                    window.location.href = 'login.html'; // Перенаправляем на страницу входа
-                };
-            }
+            document.body.appendChild(authButton);
         });
     </script>
 </body>

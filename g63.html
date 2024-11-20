@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferrari SF90 Spider Assetto Fiorano</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tabs button {
+            flex: 1;
+            padding: 10px;
+            background: #eaeaea;
+            border: none;
+            cursor: pointer;
+        }
+
+        .tabs button.active {
+            background: #007bff;
+            color: #fff;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .specs {
+            border: 1px solid #ddd;
+            padding: 20px;
+            background: #fff;
+        }
+
+        .specs h2 {
+            margin-bottom: 20px;
+        }
+
+        .specs div {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .carousel {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .carousel img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+        }
+
+        .carousel-indicators button {
+            width: 10px;
+            height: 10px;
+            background: #ddd;
+            border: none;
+            border-radius: 50%;
+        }
+
+        .carousel-indicators button.active {
+            background: #007bff;
+        }
+
+        .fixed-buttons {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .fixed-buttons button {
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">DRENG MOTORS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="aboutus.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order.html">Sell My Car</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cars.html">Car Inventory</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="active" onclick="showTab('exterior')">EXTERIOR</button>
+            <button onclick="showTab('interior')">INTERIOR</button>
+        </div>
+
+        <!-- Main Content -->
+        <div class="carousel">
+            <img src="https://f1rstmotors.com/_next/image?url=https%3A%2F%2Ff1rst-motors.s3.me-central-1.amazonaws.com%2Fcars%2F1728564499264-blob&w=1920&q=75"
+                alt="Ferrari Purosangue">
+            <img src="https://f1rstmotors.com/_next/image?url=https%3A%2F%2Ff1rst-motors.s3.me-central-1.amazonaws.com%2Fcars%2F1728564499312-blob&w=1920&q=75"
+                alt="Ferrari Purosangue">
+            <img src="https://f1rstmotors.com/_next/image?url=https%3A%2F%2Ff1rst-motors.s3.me-central-1.amazonaws.com%2Fcars%2F1728564499274-blob&w=1920&q=75"
+                alt="Ferrari Purosangue">
+            <div class="carousel-indicators">
+                <button class="active"></button>
+                <button></button>
+                <button></button>
+            </div>
+        </div>
+
+        <!-- Tabs for Description -->
+        <div class="tabs">
+            <button class="active" onclick="showTab('description')">DESCRIPTION</button>
+            <button onclick="showTab('videos')">VIDEOS</button>
+        </div>
+        <div id="description" class="tab-content active">
+            <h2>Mercedes-Benz AMG G63</h2>
+            <p>The G63's will always remain iconic. The boxy design will never get old. It's the perfect luxury SUV with
+                high
+                performance and off-road capablities. This is an all black 2025 G63 that's here to steal the attention.
+
+
+
+                Under the hood resides the pièce de résistance - a hand-built 4-Litre V8 engine, biturbo, naturally.
+                Producing a
+                prodigious 597 hp and 850 N.M of torque, it rockets this full-sized SUV to 100 km/h in just 4.4 seconds.
+                And while
+                you’re accelerating, keep an ear out for that unmistakable baritone exhaust note.</p>
+        </div>
+        <div id="videos" class="tab-content">
+            <p>Video content will go here.</p>
+        </div>
+
+        <!-- Specifications -->
+        <div class="specs">
+            <h2>Ferrari Purosangue 2024</h2>
+            <div>
+                <span>Mileage</span>
+                <span>1,367 KM</span>
+            </div>
+            <div>
+                <span>Year</span>
+                <span>2025</span>
+            </div>
+            <!-- Add more specs here -->
+            <div>
+                <span>Price</span>
+                <span><b>AED 1 099 999</b></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Buttons -->
+    <div class="fixed-buttons">
+        <button title="Share"></button>
+        <button title="WhatsApp"></button>
+        <button title="Mail"></button>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelector(`#${tabId}`).classList.add('active');
+
+            document.querySelectorAll('.tabs button').forEach(button => button.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

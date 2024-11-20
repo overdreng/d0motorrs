@@ -22,13 +22,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="main.html">Home</a>
+                        <a class="nav-link" aria-current="page" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="aboutus.html">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="order.html">Get Order</a>
+                        <a class="nav-link active" href="order.html">Sell My Car</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact</a>
@@ -182,19 +182,30 @@
 
         const themeToggleButton = document.getElementById("themeToggleButton");
 
+        // Check and apply the saved theme from localStorage
+        const savedTheme = localStorage.getItem("theme") || "light";
+        if (savedTheme === "dark") {
+            document.body.classList.add("night-theme");
+            themeToggleButton.textContent = "Switch to Day Theme";
+        } else {
+            document.body.classList.add("day-theme");
+            themeToggleButton.textContent = "Switch to Night Theme";
+        }
+
+        // Toggle theme on button click and save the preference in localStorage
         themeToggleButton.addEventListener("click", function () {
             const body = document.body;
 
             if (body.classList.contains("day-theme")) {
                 body.classList.remove("day-theme");
                 body.classList.add("night-theme");
-
                 themeToggleButton.textContent = "Switch to Day Theme";
+                localStorage.setItem("theme", "dark");
             } else {
                 body.classList.remove("night-theme");
                 body.classList.add("day-theme");
-
                 themeToggleButton.textContent = "Switch to Night Theme";
+                localStorage.setItem("theme", "light");
             }
         });
 

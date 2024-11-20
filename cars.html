@@ -20,7 +20,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="main.html">Home</a>
+                        <a class="nav-link" aria-current="page" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="aboutus.html">About</a>
@@ -102,7 +102,7 @@
 
     <script>
         const cars = [
-            { id: 1, brand: 'BMW', model: 'M8', year: 2022, price: 130000, bodyType: 'Coupe', mileage: 10000, image: 'https://via.placeholder.com/300?text=BMW+M8' },
+            { id: 1, brand: 'Lamborghini', model: 'Urus', year: 2022, price: 130000, bodyType: 'Coupe', mileage: 10000, image: 'https://f1rstmotors.com/_next/image?url=https%3A%2F%2Ff1rst-motors.s3.me-central-1.amazonaws.com%2Fcars%2F1731770234630-blob&w=1920&q=100' },
             { id: 2, brand: 'Mercedes', model: 'GT Black Series', year: 2021, price: 160000, bodyType: 'Sedan', mileage: 15000, image: 'https://f1rstmotors.com/_next/image?url=https%3A%2F%2Ff1rst-motors.s3.me-central-1.amazonaws.com%2Fcars%2F1713947363611-blob&w=640&q=75' },
             { id: 3, brand: 'Ferrari', model: 'LaFerrari', year: 2020, price: 2800000, bodyType: 'Supercar', mileage: 5000, image: 'https://f1rstmotors.com/_next/image?url=https%3A%2F%2Ff1rst-motors.s3.me-central-1.amazonaws.com%2Fcars%2F1713884443867-blob&w=640&q=75' },
             { id: 4, brand: 'Bugatti', model: 'Chiron', year: 2019, price: 3000000, bodyType: 'Supercar', mileage: 8000, image: 'https://f1rstmotors.com/_next/image?url=https%3A%2F%2Ff1rst-motors.s3.me-central-1.amazonaws.com%2Fcars%2F1708774218475-blob&w=640&q=75' },
@@ -124,6 +124,9 @@
           <p class="text-gray-700 text-sm mb-2">Price: $${car.price.toLocaleString()}</p>
           <p class="text-gray-700 text-sm mb-2">Body Type: ${car.bodyType}</p>
           <p class="text-gray-700 text-sm mb-2">Mileage: ${car.mileage.toLocaleString()} miles</p>
+          <a href="contact.html" class="mt-2 inline-block bg-green-500 text-white px-4 py-2 rounded shadow hover:bg-green-600 no-underline">
+        ORDER
+    </a>
         </div>
       `;
                 carList.appendChild(carItem);

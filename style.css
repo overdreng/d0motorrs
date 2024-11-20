@@ -92,16 +92,14 @@
     background-color: #ddd;
 }
 
-/* Стиль для дневной темы (по умолчанию) */
 .day-theme {
     background-color: #ffffff;
     color: #000000;
 }
 
-/* Стиль для ночной темы */
 .night-theme {
-    background-color: #1a1a1a;
-    color: #f1f1f1;
+    background-color: #000000;
+    color: #ffffff;
 }
 
 /* Пример изменения стилей для элементов страницы */
